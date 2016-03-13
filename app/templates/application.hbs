@@ -1,0 +1,26 @@
+<button type="button" class="btn btn-danger btn-lg" aria-label="Stop" {{action 'stop'}}>
+    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+</button>
+
+<br><br>
+<button type="button" class="btn" {{action 'forward'}}>Forward</button>
+<button type="button" class="btn" {{action 'backward'}}>Backward</button>
+<button type="button" class="btn" {{action 'left'}}>Left</button>
+<button type="button" class="btn" {{action 'right'}}>Right</button>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Command</th>
+    </tr>
+    </thead>
+    <tbody>
+      {{#each model.commands as |command|}}
+        <tr>
+            <td>{{command.label}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+</table>
+
+{{outlet}}
