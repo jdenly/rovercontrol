@@ -29,6 +29,10 @@ export default Ember.Route.extend({
       this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Right'}));
     },
 
+    start() {
+      Ember.Logger.info('start');
+    },
+
     stop() {
       Ember.Logger.info('stop');
     }
