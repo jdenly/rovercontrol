@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  comms: Ember.inject.service(),
+
   model() {
     let model = Ember.Object.create({
       commands: []
@@ -46,14 +48,14 @@ export default Ember.Route.extend({
 
     start() {
       Ember.Logger.info('start');
-      // Send to rover here
+      this.get('comms').sendCommands(this.currentModel.get('commands'));
       this.currentModel.get('commands').clear();
       window.alert('Commands sent.');
     },
 
     stop() {
       Ember.Logger.info('stop');
-      // Send to rover here
+      this.get('comms').stop();
       window.alert('Emergency stop sent!');
     }
   }
