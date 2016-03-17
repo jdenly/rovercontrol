@@ -1,7 +1,7 @@
 <div class="container-fluid emergencystop">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
         <button type="button" class="btn btn-lg btn-danger" {{action 'stop'}} aria-label="Stop">
-            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>&nbsp;Emergency stop
+            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>&nbsp;Emergency stop
         </button>
     </div>
 </div>
@@ -34,13 +34,14 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
-            <button type="button" class="btn btn-lg btn-danger" {{action 'clearCommands'}} aria-label="Clear commands">
+            <button type="button" class="btn btn-lg btn-danger" {{action 'clearCommands'}} aria-label="Clear commands"
+                    disabled={{model.noCommands}}>
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
             <button type="button" class="btn btn-lg btn-success" {{action 'start'}} aria-label="Start"
-                    disabled={{model.startDisabled}}>
+                    disabled={{model.noCommands}}>
                 <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
             </button>
         </div>
@@ -54,7 +55,7 @@
     </tr>
     </thead>
     <tbody>
-    {{#if model.startDisabled}}
+    {{#if model.noCommands}}
         <tr>
             <td class="text-center">No commands yet</td>
         </tr>

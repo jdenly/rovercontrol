@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     let model = Ember.Object.create({
       commands: []
     });
-    model.set('startDisabled', Ember.computed('commands.[]', function() {
+    model.set('noCommands', Ember.computed('commands.[]', function() {
       return this.get('commands.length') === 0;
     }));
     return model;
@@ -48,10 +48,13 @@ export default Ember.Route.extend({
       Ember.Logger.info('start');
       // Send to rover here
       this.currentModel.get('commands').clear();
+      window.alert('Commands sent.');
     },
 
     stop() {
       Ember.Logger.info('stop');
+      // Send to rover here
+      window.alert('Emergency stop sent!');
     }
   }
 });
