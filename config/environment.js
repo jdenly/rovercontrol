@@ -16,6 +16,11 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+
+      // The device id and access token to control.
+      // Change this to the correct values for your Photon before building.
+      device_id: '12345',
+      access_token: 'abcde'
     }
   };
 

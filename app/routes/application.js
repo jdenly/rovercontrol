@@ -16,22 +16,22 @@ export default Ember.Route.extend({
   actions: {
     forward() {
       Ember.Logger.info('forward');
-      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Forward'}));
+      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Forward', value: 'F'}));
     },
 
     backward() {
       Ember.Logger.info('backward');
-      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Backward'}));
+      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Backward', value: 'B'}));
     },
 
     left() {
       Ember.Logger.info('left');
-      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Left'}));
+      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Left', value: 'L'}));
     },
 
     right() {
       Ember.Logger.info('right');
-      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Right'}));
+      this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Right', value: 'R'}));
     },
 
     removeCommand(command) {
@@ -50,13 +50,12 @@ export default Ember.Route.extend({
       Ember.Logger.info('start');
       this.get('comms').sendCommands(this.currentModel.get('commands'));
       this.currentModel.get('commands').clear();
-      window.alert('Commands sent.');
     },
 
     stop() {
       Ember.Logger.info('stop');
       this.get('comms').stop();
-      window.alert('Emergency stop sent!');
+      window.alert('Emergency stop!');
     }
   }
 });
