@@ -2,6 +2,10 @@
 
 Remote control for PhoBot based robot.
 
+The required firmware is in firmware directory, based mostly on https://github.com/simonmonk/PhoBot.
+
+Before compiling the Ember.js application, be sure to change the config/environment.js file to provide your device id and access_token.
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
