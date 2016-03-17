@@ -5,6 +5,9 @@ export default Ember.Route.extend({
     let model = Ember.Object.create({
       commands: []
     });
+    model.set('startDisabled', Ember.computed('commands.[]', function() {
+      return this.get('commands.length') === 0;
+    }));
     return model;
   },
 
@@ -29,8 +32,22 @@ export default Ember.Route.extend({
       this.currentModel.get('commands').pushObject(Ember.Object.create({label: 'Right'}));
     },
 
+    removeCommand(command) {
+      Ember.Logger.info('removeCommand', command.name);
+      this.currentModel.get('commands').removeObject(command);
+    },
+
+    clearCommands() {
+      Ember.Logger.info('clearCommands');
+      if(window.confirm('Clear all commands?')) {
+        this.currentModel.get('commands').clear();
+      }
+    },
+
     start() {
       Ember.Logger.info('start');
+      // Send to rover here
+      this.currentModel.get('commands').clear();
     },
 
     stop() {
