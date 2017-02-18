@@ -21,10 +21,10 @@ https://api.Particle.io/v1/devices/3b001b000447343232363230/distance?access_toke
 
 double volts = 0.0;
 double distance = 0.0;
-String linear_speed = "40";
+String linear_speed = "75";
 String turn_speed = "50";
-int linear_delay = 1000;
-int turn_delay = 500;
+int linear_delay = 500;
+int turn_delay = 250;
 boolean stop_flag = false;
 
 PhoBot p = PhoBot(6.0, 6.0);
