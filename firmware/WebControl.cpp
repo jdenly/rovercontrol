@@ -24,8 +24,11 @@ double distance = 0.0;
 String linear_speed = "75";
 String turn_speed = "50";
 int linear_delay = 500;
+int i2c_linear_delay = 100;
 int turn_delay = 250;
+int i2c_turn_delay = 100;
 boolean stop_flag = false;
+char command = 'X';
 
 PhoBot p = PhoBot(6.0, 6.0);
 HC_SR04 rangefinder = HC_SR04(p.trigPin, p.echoPin);
@@ -65,15 +68,42 @@ int commands(String commands) {
   return 0;
 }
 
+void receiveEvent(int howMany) {
+  while(Wire.available()) {
+    command = Wire.read();
+  }
+}
+
 void setup() {
     Particle.function("stop", stop);
     Particle.function("commands", commands);
     Particle.variable("volts", &volts, DOUBLE);
     Particle.variable("distance", &distance, DOUBLE);
+    Wire.begin(3);
+    Wire.onReceive(receiveEvent);
+    Serial.begin(9600);
 }
 
 void loop() {
     volts = p.batteryVolts();
     distance = rangefinder.getDistanceCM();
-    delay(100);
+    if(command != 'X') {
+      if(command == 'F') {
+        p.control("F-" + linear_speed);
+        delay(i2c_linear_delay);
+      } else if(command == 'B') {
+        p.control("B-" + linear_speed);
+        delay(i2c_linear_delay);
+      } else if(command == 'L') {
+        p.control("L-" + turn_speed);
+        delay(i2c_turn_delay);
+      } else if(command == 'R') {
+        p.control("R-" + turn_speed);
+        delay(i2c_turn_delay);
+      }
+      p.control("S");
+      command = 'X';
+    } else {
+      delay(100);
+    }
 }
